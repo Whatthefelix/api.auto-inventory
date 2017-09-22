@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/config.js"],"names":["config"],"mappings":";;;;;AAAA,IAAMA,SAAS;AACb,YAAU,gBADG;AAEb,cAAY;AAFC,CAAf;;kBAKeA,M","file":"config.js","sourcesContent":["const config = {\n  'secret': 'felixappsecret',\n  'database': 'mongodb://127.0.0.1:27017'\n}\n\nexport default config;"]}
