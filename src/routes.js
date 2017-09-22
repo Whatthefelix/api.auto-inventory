@@ -60,7 +60,7 @@ import jwt from 'jsonwebtoken';
       } else {
         bcrypt.compare(req.body.password, user.password, function(err, isMatch) {
           if (isMatch && !err) {
-            let token = jwt.sign({data: user}, app.get('superSecretPassword'), {
+            let token = jwt.sign({data: user}, config.secret, {
               expiresIn: 1440
             });
             res.json({

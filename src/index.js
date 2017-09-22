@@ -8,7 +8,6 @@ import bodyParser from 'body-parser';
 import userRouter from './routes';
 
 const app = express();
-app.set('superSecretPassword', config.secret);
 app.use(userRouter);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
