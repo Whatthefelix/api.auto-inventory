@@ -4,11 +4,13 @@ import userRoutes from '../routes';
 import jwt from 'jsonwebtoken';
 import config from '../config';
 
+// const router = express.router();
+
 const routerMiddleware = {
   authenticateRoutes (req, res, next) {
-    // console.log(req.body.token);
-    // let token = req.body.token || req.query.token || req.headers['x-access-token'];
-    let token = 'test';
+
+    let token = req.body.token || req.query.token || req.get('x-access-token');
+
     if(token) {
       jwt.verify(token, config.secret, (err, decoded) => {
         if (err) {

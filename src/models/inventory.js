@@ -19,5 +19,8 @@ const InventorySchema = new mongoose.Schema({
   booked_date: Date
 });
 
+// const InventorySchema.pre('save', () => {
+
+// });
+
 export default mongoose.model('Inventory', InventorySchema);
-// InventorySchema.set('toJSON', getters: true)

@@ -46,9 +46,7 @@ const authController = {
       } else {
         bcrypt.compare(req.body.password, user.password, function(err, isMatch) {
           if (isMatch && !err) {
-            let token = jwt.sign({data: user}, config.secret, {
-              expiresIn: 1440
-            });
+            let token = jwt.sign({data: user}, config.secret);
             res.json({
               success: true,
               message: 'Token received',
