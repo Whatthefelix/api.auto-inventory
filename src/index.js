@@ -8,6 +8,7 @@ import userRoutes from './routes';
 
 const app = express();
 app.use(userRoutes);
+// app.use(userRoutes.)
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
