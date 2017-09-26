@@ -15,7 +15,14 @@ const inventoryController = {
     let inventory = new Inventory(req.body);
 
     inventory.save((err) => {
-      if (err) throw err;
+      if (err && err.code === 11000) {
+        res.json({
+          success: false,
+          status: 400,
+          message: 'Duplicate Stock Number'
+        });
+        return;
+      };
       res.json({
         success: true,
         status: 201,
@@ -27,17 +34,59 @@ const inventoryController = {
   getById(req, res) {
     Inventory.findOne({ stock_number: req.params.stock_number }, (err, item) => {
       if (err) throw err;
-      res.json(item);
+
+      if (!item) {
+        res.json({
+          success: false,
+          status: 404,
+          message: 'No item found'
+        });
+      } else {
+        res.json(item);
+      }
     });
   },
 
-  // WIP
-  // updateItem(req, res) {
-  //   Inventory.findOneAndUpdate({ stock_number: res.body.stock_number }, (err, item) => {
-  //     if (err) throw err;
-  //     res.json(item);
-  //   });
-  // }
+  updateItem(req, res) {
+    let updatedItem = req.body;
+    Inventory.findOneAndUpdate({ stock_number: req.params.stock_number }, updatedItem, (err, item) => {
+      // figure out what to do if stock number doesnt exist
+      // try catch? don't let server crash
+      if (err) throw err;
+      if (!item) {
+        res.json({
+          success: false,
+          status: 404,
+          message: 'No item found'
+        });
+      }
+      res.json({
+        success: true,
+        status: 200,
+        message: `${req.params.stock_number} has been updated`
+      });
+    });
+  },
+
+  deleteOne(req, res) {
+    let item = req.body
+    Inventory.deleteOne(item, (err, item) => {
+      if (err) throw err;
+      if (!item) {
+        res.json({
+          success: false,
+          status: 404,
+          message: 'No item found'
+        });
+      } else {
+        res.json({
+          success: true,
+          status: 201,
+          message: `${req.body.stock_number} has been deleted`
+        });
+      }
+    });
+  }
 
 }
 export default inventoryController;

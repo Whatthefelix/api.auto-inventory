@@ -6,7 +6,7 @@ import config from '../config';
 
 const authController = {
 
-  setup (req, res) {
+  signUp (req, res) {
     let user = new User({
       username: req.body.username,
       password: req.body.password,
@@ -26,12 +26,13 @@ const authController = {
 
       res.json({
         success: true,
-        status: 201
+        status: 201,
+        message: 'User has been created'
       });
     });
   },
 
-  authenticate (req, res) {
+  signIn (req, res) {
     User.findOne({
       username: req.body.username
     }, (arrow, user) => {
