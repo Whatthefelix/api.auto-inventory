@@ -41,6 +41,7 @@ const inventoryController = {
           status: 404,
           message: 'No item found'
         });
+        return;
       } else {
         res.json(item);
       }
@@ -50,15 +51,21 @@ const inventoryController = {
   updateItem(req, res) {
     let updatedItem = req.body;
     Inventory.findOneAndUpdate({ stock_number: req.params.stock_number }, updatedItem, (err, item) => {
-      // figure out what to do if stock number doesnt exist
-      // try catch? don't let server crash
-      if (err) throw err;
+      if (err) {
+        res.json({
+          success: false,
+          status: 404,
+          message: 'stock number not found'
+        });
+        return;
+      };
       if (!item) {
         res.json({
           success: false,
           status: 404,
           message: 'No item found'
         });
+        return
       }
       res.json({
         success: true,
