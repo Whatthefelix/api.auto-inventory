@@ -29,6 +29,13 @@ const routerMiddleware = {
         message: 'No token found'
       });
     }
+  },
+
+  // Allow CORS
+  allowCrossOrigin (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
   }
 }
 

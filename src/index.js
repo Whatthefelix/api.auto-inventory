@@ -4,11 +4,10 @@ import config from './config';
 import bodyParser from 'body-parser';
 
 //routes
-import userRoutes from './routes';
+import routes from './routes';
 
 const app = express();
-app.use(userRoutes);
-// app.use(userRoutes.)
+app.use(routes);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
