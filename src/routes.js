@@ -30,5 +30,4 @@ routes.post('/api/create', inventoryController.create); // check
 routes.post('/api/update/:stock_number', inventoryController.updateItem); // check ( needs error handling )
 routes.delete('/api/delete/:stock_number', inventoryController.deleteOne); // check
 
-
 export default routes;
