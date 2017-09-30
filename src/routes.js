@@ -10,8 +10,9 @@ routes.use(bodyParser.json());
 
 
 // All /api routes require Authentication
-routes.use('/api', routerMiddleware.authenticateRoutes);
 routes.use(routerMiddleware.allowCrossOrigin);
+routes.use('/api', routerMiddleware.authenticateRoutes);
+
 
 /* -------------------------------------------------------
     User Routes
