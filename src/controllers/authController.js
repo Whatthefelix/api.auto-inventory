@@ -35,8 +35,8 @@ const authController = {
   signIn (req, res) {
     User.findOne({
       username: req.body.username
-    }, (arrow, user) => {
-      if (arrow) throw arrow;
+    }, (error, user) => {
+      if (error) throw error;
 
       if (!user) {
         res.json({
